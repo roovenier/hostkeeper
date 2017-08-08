@@ -31,10 +31,13 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         return projectsArray.count
     }
     
-    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         if tableColumn!.identifier == "terminal" {
             let button = tableView.make(withIdentifier: "terminal", owner: self) as! NSButton
             button.title = "Открыть"
+            button.tag = row
+            button.target = self
+            button.action = #selector(openTerminal(sender:))
             return button
         } else {
             let result = tableView.make(withIdentifier:(tableColumn?.identifier)!, owner: self) as! NSTableCellView
@@ -45,6 +48,10 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     }
     
     // MARK: Actions
+    
+    func openTerminal(sender: NSButton) {
+        print(sender.tag)
+    }
     
     func fetchedProjects() -> [Project] {
         let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Project")
