@@ -163,7 +163,10 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     
     func addNewProject(newProject: Project) {
         projectsArray.insert(newProject, at: 0)
-        tableView.reloadData()
+        
+        tableView.beginUpdates()
+        tableView.insertRows(at: IndexSet.init(integer: 0), withAnimation: NSTableViewAnimationOptions.effectFade)
+        tableView.endUpdates()
     }
     
     // MARK: EditProjectControllerDelegate
