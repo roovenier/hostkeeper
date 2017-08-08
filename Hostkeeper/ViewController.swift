@@ -35,17 +35,27 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         if tableColumn!.identifier == "terminal" {
             let button = tableView.make(withIdentifier: "terminal", owner: self) as! NSButton
-            button.title = "Терминал"
             button.tag = row
             button.target = self
             button.action = #selector(openTerminal(sender:))
             return button
         } else if tableColumn!.identifier == "browser" {
             let button = tableView.make(withIdentifier: "browser", owner: self) as! NSButton
-            button.title = "Браузер"
             button.tag = row
             button.target = self
             button.action = #selector(openBrowser(sender:))
+            return button
+        } else if tableColumn!.identifier == "edit" {
+            let button = tableView.make(withIdentifier: "edit", owner: self) as! NSButton
+            button.tag = row
+            button.target = self
+            button.action = #selector(editProject(sender:))
+            return button
+        } else if tableColumn!.identifier == "remove" {
+            let button = tableView.make(withIdentifier: "remove", owner: self) as! NSButton
+            button.tag = row
+            button.target = self
+            button.action = #selector(removeProject(sender:))
             return button
         } else {
             let result = tableView.make(withIdentifier:(tableColumn?.identifier)!, owner: self) as! NSTableCellView
@@ -76,6 +86,14 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         
         let appleScript = NSAppleScript.init(source: fullCommand)
         appleScript?.executeAndReturnError(nil)
+    }
+    
+    func editProject(sender: NSButton) {
+        
+    }
+    
+    func removeProject(sender: NSButton) {
+        
     }
     
     func fetchedProjects() -> [Project] {
