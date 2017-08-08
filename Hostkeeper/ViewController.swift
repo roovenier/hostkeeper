@@ -50,7 +50,13 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     // MARK: Actions
     
     func openTerminal(sender: NSButton) {
-        print(sender.tag)
+        let project = projectsArray[sender.tag]
+        let scriptPath = Bundle.main.resourcePath! + "/exp"
+        
+        let fullCommand = "tell application \"Terminal\"\n activate\n tell application \"System Events\" to keystroke \"t\" using command down\n do script \"\(scriptPath) \(project.password!) \(project.projectHost!) \(project.username!)\" in window 1\n end tell"
+        
+        let appleScript = NSAppleScript.init(source: fullCommand)
+        appleScript?.executeAndReturnError(nil)
     }
     
     func fetchedProjects() -> [Project] {
