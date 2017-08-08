@@ -686,15 +686,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="712" height="430"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="30" horizontalPageScroll="10" verticalLineScroll="30" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aHL-1K-gz4">
+                            <scrollView fixedFrame="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="30" horizontalPageScroll="10" verticalLineScroll="30" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aHL-1K-gz4">
                                 <rect key="frame" x="20" y="16" width="672" height="359"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <clipView key="contentView" ambiguous="YES" id="FbU-5K-4Gl">
-                                    <rect key="frame" x="1" y="0.0" width="670" height="358"/>
+                                <clipView key="contentView" ambiguous="YES" drawsBackground="NO" id="FbU-5K-4Gl">
+                                    <rect key="frame" x="0.0" y="0.0" width="672" height="359"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="28" headerView="9wP-Bu-vNs" viewBased="YES" id="uNH-fZ-MRH">
-                                            <rect key="frame" x="0.0" y="0.0" width="670" height="335"/>
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="28" viewBased="YES" id="uNH-fZ-MRH">
+                                            <rect key="frame" x="0.0" y="0.0" width="672" height="359"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -733,7 +733,7 @@
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn identifier="terminal" width="323" minWidth="40" maxWidth="1000" id="MV0-EZ-hjR">
+                                                <tableColumn identifier="terminal" width="325" minWidth="40" maxWidth="1000" id="MV0-EZ-hjR">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Терминал">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -747,7 +747,7 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <button verticalHuggingPriority="750" id="XAo-E2-RJL">
-                                                            <rect key="frame" x="345" y="1" width="323" height="32"/>
+                                                            <rect key="frame" x="345" y="1" width="325" height="32"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                             <buttonCell key="cell" type="push" title="Открыть" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="60V-IX-Brz">
                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -768,10 +768,6 @@
                                     <rect key="frame" x="-14" y="-8" width="15" height="0.0"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <tableHeaderView key="headerView" id="9wP-Bu-vNs">
-                                    <rect key="frame" x="0.0" y="0.0" width="670" height="23"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableHeaderView>
                             </scrollView>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B7b-6I-GdA">
                                 <rect key="frame" x="671" y="390" width="21" height="21"/>

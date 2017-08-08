@@ -21,6 +21,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.backgroundColor = NSColor.clear
         
         projectsArray = fetchedProjects()
         
