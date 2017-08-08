@@ -35,10 +35,17 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         if tableColumn!.identifier == "terminal" {
             let button = tableView.make(withIdentifier: "terminal", owner: self) as! NSButton
-            button.title = "Открыть"
+            button.title = "Терминал"
             button.tag = row
             button.target = self
             button.action = #selector(openTerminal(sender:))
+            return button
+        } else if tableColumn!.identifier == "browser" {
+            let button = tableView.make(withIdentifier: "browser", owner: self) as! NSButton
+            button.title = "Браузер"
+            button.tag = row
+            button.target = self
+            button.action = #selector(openBrowser(sender:))
             return button
         } else {
             let result = tableView.make(withIdentifier:(tableColumn?.identifier)!, owner: self) as! NSTableCellView
@@ -55,6 +62,17 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         let scriptPath = Bundle.main.resourcePath! + "/exp"
         
         let fullCommand = "tell application \"Terminal\"\n activate\n tell application \"System Events\" to keystroke \"t\" using command down\n do script \"\(scriptPath) \(project.password!) \(project.projectHost!) \(project.username!)\" in window 1\n end tell"
+        
+        let appleScript = NSAppleScript.init(source: fullCommand)
+        appleScript?.executeAndReturnError(nil)
+    }
+    
+    func openBrowser(sender: NSButton) {
+        let project = projectsArray[sender.tag]
+        
+        let fullCommand = "tell application \"Google Chrome\"\n repeat with w in windows\n set i to 1\n repeat with t in tabs of w\n if URL of t starts with \"https://mail.google\" then\n set active tab index of w to i\n set index of w to 1\n return\n end if\n set i to i + 1\n end repeat\n end repeat\n open location \"\(project.projectLink!)\"\n end tell"
+        
+        print(fullCommand)
         
         let appleScript = NSAppleScript.init(source: fullCommand)
         appleScript?.executeAndReturnError(nil)
