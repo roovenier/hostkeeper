@@ -19,6 +19,9 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.delegate = self
+        tableView.dataSource = self
+        
          projectsArray = fetchedProjects()
     }
     
@@ -28,7 +31,9 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     
     func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
         if tableColumn!.identifier == "terminal" {
-            return tableView.make(withIdentifier: "terminal", owner: self) as! NSButton
+            let button = tableView.make(withIdentifier: "terminal", owner: self) as! NSButton
+            button.title = "Открыть"
+            return button
         } else {
             let result = tableView.make(withIdentifier:(tableColumn?.identifier)!, owner: self) as! NSTableCellView
             let projectTitle = projectsArray[row].value(forKey: (tableColumn?.identifier)!)! as! String
