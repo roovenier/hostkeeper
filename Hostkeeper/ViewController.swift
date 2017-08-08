@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NewProjectControllerDelegate {
+class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NewProjectControllerDelegate, EditProjectControllerDelegate {
     
     @IBOutlet weak var tableView: NSTableView!
     
@@ -22,6 +22,8 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = NSColor.clear
+        
+        clearAllData()
         
         projectsArray = fetchedProjects()
         
@@ -67,6 +69,17 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     
     // MARK: Actions
     
+    func clearAllData() {
+        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Project")
+        let request = NSBatchDeleteRequest(fetchRequest: fetch)
+        
+        do {
+            try managedObjectContext.execute(request)
+        } catch {
+            print("Error on clear core data")
+        }
+    }
+    
     func openTerminal(sender: NSButton) {
         let project = projectsArray[sender.tag]
         let scriptPath = Bundle.main.resourcePath! + "/exp"
@@ -89,11 +102,43 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     }
     
     func editProject(sender: NSButton) {
+        let project = projectsArray[sender.tag]
         
+        let vc = self.storyboard?.instantiateController(withIdentifier: "EditProjectController") as! EditProjectController
+        
+        vc.delegate = self
+        vc.project = project
+        
+        self.presentViewControllerAsModalWindow(vc)
     }
     
     func removeProject(sender: NSButton) {
+        let project = projectsArray[sender.tag]
         
+        let alert = NSAlert()
+        alert.messageText = project.projectTitle!
+        alert.informativeText = "Вы действительно хотите удалить этот проект?"
+        alert.addButton(withTitle: "Удалить")
+        alert.addButton(withTitle: "Отменить")
+        alert.alertStyle = NSAlertStyle.warning
+        
+        alert.beginSheetModal(for: self.view.window!, completionHandler: { (modalResponse) -> Void in
+            if modalResponse == NSAlertFirstButtonReturn {
+                self.managedObjectContext.delete(project)
+                
+                do {
+                    try self.managedObjectContext.save()
+                    
+                    self.projectsArray.remove(at: sender.tag)
+                    
+                    self.tableView.beginUpdates()
+                    self.tableView.removeRows(at: IndexSet.init(integer: sender.tag), withAnimation: NSTableViewAnimationOptions.effectFade)
+                    self.tableView.endUpdates()
+                } catch {
+                    print("Error on insert new project")
+                }
+            }
+        })
     }
     
     func fetchedProjects() -> [Project] {
@@ -120,6 +165,12 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     
     func addNewProject(newProject: Project) {
         projectsArray.insert(newProject, at: 0)
+        tableView.reloadData()
+    }
+    
+    // MARK: EditProjectControllerDelegate
+    
+    func editProjectUpdate() {
         tableView.reloadData()
     }
 }

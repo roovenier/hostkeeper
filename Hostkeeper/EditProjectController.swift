@@ -1,19 +1,18 @@
 //
-//  NewProjectController.swift
+//  EditProjectController.swift
 //  Hostkeeper
 //
-//  Created by alexander.oschepkov on 07.08.17.
+//  Created by alexander.oschepkov on 08.08.17.
 //  Copyright © 2017 alexander.oschepkov. All rights reserved.
 //
 
 import Cocoa
-import AES256CBC
 
-protocol NewProjectControllerDelegate {
-    func addNewProject(newProject: Project);
+protocol EditProjectControllerDelegate {
+    func editProjectUpdate();
 }
 
-class NewProjectController: NSViewController {
+class EditProjectController: NSViewController {
 
     @IBOutlet weak var projectTitleField: NSTextField!
     @IBOutlet weak var projectLinkField: NSTextField!
@@ -22,10 +21,22 @@ class NewProjectController: NSViewController {
     @IBOutlet weak var passwordField: NSSecureTextField!
     
     let managedObjectContext: NSManagedObjectContext = DataManager.instance.managedObjectContext
-    var delegate: NewProjectControllerDelegate?
+    var delegate: EditProjectControllerDelegate?
+    var project: Project?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        self.view.window?.title = project!.projectTitle!
+        
+        projectTitleField.stringValue = project!.projectTitle!
+        projectLinkField.stringValue = project!.projectLink!
+        projectHostField.stringValue = project!.projectHost!
+        usernameField.stringValue = project!.username!
+        passwordField.stringValue = project!.password!
     }
     
     @IBAction func saveProjectAction(_ sender: NSButton) {
@@ -36,17 +47,15 @@ class NewProjectController: NSViewController {
         let password = self.passwordField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
         
         if projectTitle.characters.count > 0 && projectLink.characters.count > 0 && projectHost.characters.count > 0 && username.characters.count > 0 && password.characters.count > 0 {
-            let newProject = NSEntityDescription.insertNewObject(forEntityName: "Project", into: managedObjectContext) as! Project
-            newProject.projectTitle = projectTitle
-            newProject.projectLink = projectLink
-            newProject.projectHost = projectHost
-            newProject.username = username
-            newProject.password = password
-            newProject.createdDate = NSDate()
+            project?.projectTitle = projectTitle
+            project?.projectLink = projectLink
+            project?.projectHost = projectHost
+            project?.username = username
+            project?.password = password
             
             do {
                 try managedObjectContext.save()
-                delegate?.addNewProject(newProject: newProject)
+                delegate?.editProjectUpdate()
                 
                 self.view.window?.close()
             } catch {
@@ -54,4 +63,5 @@ class NewProjectController: NSViewController {
             }
         }
     }
+    
 }
