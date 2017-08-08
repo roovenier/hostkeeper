@@ -7,15 +7,51 @@
 //
 
 import Cocoa
+import AES256CBC
 
-class NewProjectController: ViewController {
+protocol NewProjectControllerDelegate {
+    func addNewProject(newProject: Project);
+}
 
+class NewProjectController: NSViewController {
+
+    @IBOutlet weak var projectTitleField: NSTextField!
+    @IBOutlet weak var projectLinkField: NSTextField!
+    @IBOutlet weak var projectHostField: NSTextField!
+    @IBOutlet weak var usernameField: NSTextField!
+    @IBOutlet weak var passwordField: NSSecureTextField!
+    
+    let managedObjectContext: NSManagedObjectContext = DataManager.instance.managedObjectContext
+    var delegate: NewProjectControllerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
     }
     
     @IBAction func saveProjectAction(_ sender: NSButton) {
-        print("test")
+        let projectTitle = self.projectTitleField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
+        let projectLink = self.projectLinkField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
+        let projectHost = self.projectHostField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
+        let username = self.usernameField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
+        let password = self.passwordField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        if projectTitle.characters.count > 0 && projectLink.characters.count > 0 && projectHost.characters.count > 0 && username.characters.count > 0 && password.characters.count > 0 {
+            let newProject = NSEntityDescription.insertNewObject(forEntityName: "Project", into: managedObjectContext) as! Project
+            newProject.projectTitle = projectTitle
+            newProject.projectLink = projectLink
+            newProject.projectHost = projectHost
+            newProject.username = username
+            newProject.password = password
+            
+            do {
+                try managedObjectContext.save()
+                delegate?.addNewProject(newProject: newProject)
+                
+                self.view.window?.close()
+            } catch {
+                print("Error on insert new project")
+            }
+        }
     }
 }

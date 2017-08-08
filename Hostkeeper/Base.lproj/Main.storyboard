@@ -700,7 +700,7 @@
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn identifier="project" width="341" minWidth="40" maxWidth="1000" id="3RK-QC-cvz">
+                                                <tableColumn identifier="projectTitle" width="341" minWidth="40" maxWidth="1000" id="3RK-QC-cvz">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Проект">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -785,7 +785,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <segue destination="WNg-PU-qAV" kind="modal" id="SUx-gq-97Z"/>
+                                    <segue destination="WNg-PU-qAV" kind="modal" identifier="NewProjectSegue" id="SUx-gq-97Z"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -912,6 +912,13 @@
                             </button>
                         </subviews>
                     </view>
+                    <connections>
+                        <outlet property="passwordField" destination="88A-Zk-2Kc" id="w72-cz-6uQ"/>
+                        <outlet property="projectHostField" destination="Pox-c7-7NA" id="H21-Yd-9KP"/>
+                        <outlet property="projectLinkField" destination="C1y-H3-pbH" id="1Og-gc-bsB"/>
+                        <outlet property="projectTitleField" destination="wuf-6O-ioT" id="GEU-Tf-x6L"/>
+                        <outlet property="usernameField" destination="ldv-6V-z9e" id="zAX-l9-EdR"/>
+                    </connections>
                 </viewController>
                 <customObject id="gjg-td-NZV" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
