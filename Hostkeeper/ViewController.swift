@@ -22,7 +22,9 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         tableView.delegate = self
         tableView.dataSource = self
         
-         projectsArray = fetchedProjects()
+        projectsArray = fetchedProjects()
+        
+        tableView.reloadData()
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
