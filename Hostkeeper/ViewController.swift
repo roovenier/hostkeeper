@@ -91,7 +91,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     func openBrowser(sender: NSButton) {
         let project = projectsArray[sender.tag]
         
-        let fullCommand = "tell application \"Google Chrome\"\n repeat with w in windows\n set i to 1\n repeat with t in tabs of w\n if URL of t starts with \"https://mail.google\" then\n set active tab index of w to i\n set index of w to 1\n return\n end if\n set i to i + 1\n end repeat\n end repeat\n open location \"\(project.projectLink!)\"\n end tell"
+        let fullCommand = "tell application \"Google Chrome\"\n activate\n repeat with w in windows\n set i to 1\n repeat with t in tabs of w\n if URL of t starts with \"https://mail.google\" then\n set active tab index of w to i\n set index of w to 1\n return\n end if\n set i to i + 1\n end repeat\n end repeat\n open location \"\(project.projectLink!)\"\n end tell"
         
         let appleScript = NSAppleScript.init(source: fullCommand)
         appleScript?.executeAndReturnError(nil)
