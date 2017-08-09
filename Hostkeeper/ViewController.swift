@@ -39,6 +39,12 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
             button.target = self
             button.action = #selector(openTerminal(sender:))
             return button
+        } else if tableColumn!.identifier == "transmit" {
+            let button = tableView.make(withIdentifier: "transmit", owner: self) as! NSButton
+            button.tag = row
+            button.target = self
+            button.action = #selector(openTransmit(sender:))
+            return button
         } else if tableColumn!.identifier == "browser" {
             let button = tableView.make(withIdentifier: "browser", owner: self) as! NSButton
             button.tag = row
@@ -83,6 +89,15 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         let scriptPath = Bundle.main.resourcePath! + "/exp"
         
         let fullCommand = "tell application \"Terminal\"\n activate\n tell application \"System Events\" to keystroke \"t\" using command down\n do script \"\(scriptPath) \(project.password!) \(project.projectHost!) \(project.username!)\" in window 1\n end tell"
+        
+        let appleScript = NSAppleScript.init(source: fullCommand)
+        appleScript?.executeAndReturnError(nil)
+    }
+    
+    func openTransmit(sender: NSButton) {
+        let project = projectsArray[sender.tag]
+        
+        let fullCommand = "tell application \"Transmit\"\n activate\n tell document 1\n tell application \"System Events\" to keystroke \"t\" using command down\n delay 0.2\n tell current tab\n connect to address \"\(project.projectHost!)\" as user \"\(project.username!)\" with password \"\(project.password!)\"\n end tell\n end tell\n end tell"
         
         let appleScript = NSAppleScript.init(source: fullCommand)
         appleScript?.executeAndReturnError(nil)
