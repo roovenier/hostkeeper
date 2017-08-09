@@ -15,6 +15,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     let managedObjectContext: NSManagedObjectContext = DataManager.instance.managedObjectContext
     
     var projectsArray = [Project]()
+    var projectsArrayFiltered = [Project]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +30,12 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return projectsArray.count
+        if self.projectsArrayFiltered.count > 0 {
+            return self.projectsArrayFiltered.count
+        }
+        else {
+            return projectsArray.count
+        }
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
@@ -65,13 +71,31 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
             return button
         } else {
             let result = tableView.make(withIdentifier:(tableColumn?.identifier)!, owner: self) as! NSTableCellView
-            let projectTitle = projectsArray[row].value(forKey: (tableColumn?.identifier)!)! as! String
+            
+            var projectTitle = projectsArray[row].value(forKey: (tableColumn?.identifier)!)! as! String
+            if projectsArrayFiltered.count > 0 {
+                projectTitle = projectsArrayFiltered[row].value(forKey: (tableColumn?.identifier)!)! as! String
+            }
+            
             result.textField?.stringValue = projectTitle
             return result
         }
     }
     
     // MARK: Actions
+    
+    
+    @IBAction func searchFieldAction(_ sender: NSSearchField) {
+        let searchValue = sender.stringValue.trimmingCharacters(in: .whitespaces)
+        
+        if searchValue.characters.count == 0 {
+            projectsArrayFiltered.removeAll()
+        } else {
+            projectsArrayFiltered = self.projectsArray.filter { $0.projectTitle!.lowercased().contains(sender.stringValue.lowercased()) }
+        }
+        
+        tableView.reloadData()
+    }
     
     func clearAllData() {
         let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Project")

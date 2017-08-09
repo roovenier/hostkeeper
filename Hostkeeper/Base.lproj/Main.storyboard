@@ -873,6 +873,18 @@
                                     <segue destination="WNg-PU-qAV" kind="modal" identifier="NewProjectSegue" id="SUx-gq-97Z"/>
                                 </connections>
                             </button>
+                            <searchField wantsLayer="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ss8-Iz-jQQ">
+                                <rect key="frame" x="20" y="388" width="525" height="22"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="JKW-Cz-2eN">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </searchFieldCell>
+                                <connections>
+                                    <action selector="searchFieldAction:" target="XfG-lQ-9wD" id="vRS-ec-dWb"/>
+                                </connections>
+                            </searchField>
                         </subviews>
                     </view>
                     <connections>
