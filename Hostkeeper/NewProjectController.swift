@@ -20,6 +20,8 @@ class NewProjectController: NSViewController {
     @IBOutlet weak var projectHostField: NSTextField!
     @IBOutlet weak var usernameField: NSTextField!
     @IBOutlet weak var passwordField: NSSecureTextField!
+    @IBOutlet weak var noticeLabel: NSTextField!
+    
     
     let managedObjectContext: NSManagedObjectContext = DataManager.instance.managedObjectContext
     var delegate: NewProjectControllerDelegate?
@@ -52,6 +54,11 @@ class NewProjectController: NSViewController {
             } catch {
                 print("Error on insert new project")
             }
+        } else {
+            NSAnimationContext.runAnimationGroup({ (context) in
+                context.duration = 4.5
+                noticeLabel.textColor = NSColor.red
+            }, completionHandler: nil)
         }
     }
 }

@@ -900,11 +900,11 @@
             <objects>
                 <viewController title="Новый проект" storyboardIdentifier="NewProjectController" id="WNg-PU-qAV" customClass="NewProjectController" customModule="Hostkeeper" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="hM5-sv-uix">
-                        <rect key="frame" x="0.0" y="0.0" width="346" height="288"/>
+                        <rect key="frame" x="0.0" y="0.0" width="346" height="330"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wuf-6O-ioT">
-                                <rect key="frame" x="166" y="246" width="160" height="22"/>
+                                <rect key="frame" x="166" y="288" width="160" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="prP-Na-ggN">
                                     <font key="font" metaFont="system"/>
@@ -913,7 +913,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qvc-Ug-4GL">
-                                <rect key="frame" x="18" y="207" width="103" height="17"/>
+                                <rect key="frame" x="18" y="249" width="103" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Ссылка на сайт" id="ZdH-Bf-fcu">
                                     <font key="font" metaFont="system"/>
@@ -922,7 +922,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C1y-H3-pbH">
-                                <rect key="frame" x="166" y="204" width="160" height="22"/>
+                                <rect key="frame" x="166" y="246" width="160" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="txq-go-nmZ">
                                     <font key="font" metaFont="system"/>
@@ -931,7 +931,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oHq-70-1kp">
-                                <rect key="frame" x="18" y="165" width="34" height="17"/>
+                                <rect key="frame" x="18" y="207" width="34" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Хост" id="mc5-Zs-Qcg">
                                     <font key="font" metaFont="system"/>
@@ -940,7 +940,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pox-c7-7NA">
-                                <rect key="frame" x="166" y="162" width="160" height="22"/>
+                                <rect key="frame" x="166" y="204" width="160" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="pYB-oS-HJq">
                                     <font key="font" metaFont="system"/>
@@ -949,7 +949,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WVs-hN-npZ">
-                                <rect key="frame" x="18" y="123" width="120" height="17"/>
+                                <rect key="frame" x="18" y="165" width="120" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Имя пользователя" id="IT8-ml-lSE">
                                     <font key="font" metaFont="system"/>
@@ -958,7 +958,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ldv-6V-z9e">
-                                <rect key="frame" x="166" y="120" width="160" height="22"/>
+                                <rect key="frame" x="166" y="162" width="160" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="EKI-YU-9JH">
                                     <font key="font" metaFont="system"/>
@@ -967,7 +967,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Msl-iB-ZWF">
-                                <rect key="frame" x="18" y="250" width="120" height="17"/>
+                                <rect key="frame" x="18" y="292" width="120" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Название проекта" id="ANy-We-sxc">
                                     <font key="font" metaFont="system"/>
@@ -976,7 +976,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a8P-iT-bLd">
-                                <rect key="frame" x="18" y="81" width="51" height="17"/>
+                                <rect key="frame" x="18" y="123" width="51" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Пароль" id="qs6-1M-kJ6">
                                     <font key="font" metaFont="system"/>
@@ -985,7 +985,7 @@
                                 </textFieldCell>
                             </textField>
                             <secureTextField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="88A-Zk-2Kc">
-                                <rect key="frame" x="166" y="76" width="160" height="22"/>
+                                <rect key="frame" x="166" y="118" width="160" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" usesSingleLineMode="YES" id="zIX-PY-adK">
                                     <font key="font" metaFont="system"/>
@@ -996,6 +996,15 @@
                                     </allowedInputSourceLocales>
                                 </secureTextFieldCell>
                             </secureTextField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7AD-4m-ia5">
+                                <rect key="frame" x="67" y="71" width="212" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Необходимо заполнить все поля" id="SLx-Tn-eCZ">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="scrollBarColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7qf-2z-l9B">
                                 <rect key="frame" x="119" y="13" width="108" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -1010,6 +1019,7 @@
                         </subviews>
                     </view>
                     <connections>
+                        <outlet property="noticeLabel" destination="7AD-4m-ia5" id="o8F-98-h6e"/>
                         <outlet property="passwordField" destination="88A-Zk-2Kc" id="w72-cz-6uQ"/>
                         <outlet property="projectHostField" destination="Pox-c7-7NA" id="H21-Yd-9KP"/>
                         <outlet property="projectLinkField" destination="C1y-H3-pbH" id="1Og-gc-bsB"/>
@@ -1019,7 +1029,7 @@
                 </viewController>
                 <customObject id="gjg-td-NZV" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="859" y="705"/>
+            <point key="canvasLocation" x="859" y="726"/>
         </scene>
         <!--Edit Project Controller-->
         <scene sceneID="wQt-ca-HHi">
@@ -1145,7 +1155,7 @@
                 </viewController>
                 <customObject id="KJj-qo-1TT" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="859" y="1093"/>
+            <point key="canvasLocation" x="859" y="1210"/>
         </scene>
     </scenes>
     <resources>
