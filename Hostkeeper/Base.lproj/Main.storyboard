@@ -687,6 +687,40 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="430"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
+                            <button hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xRU-kq-19l">
+                                <rect key="frame" x="145" y="198" width="190" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Добавить первый проект" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="wb6-PY-aKt">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <segue destination="WNg-PU-qAV" kind="modal" id="5dF-qo-si6"/>
+                                </connections>
+                            </button>
+                            <searchField wantsLayer="YES" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ss8-Iz-jQQ">
+                                <rect key="frame" x="20" y="388" width="395" height="22"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="JKW-Cz-2eN">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </searchFieldCell>
+                                <connections>
+                                    <action selector="searchFieldAction:" target="XfG-lQ-9wD" id="vRS-ec-dWb"/>
+                                </connections>
+                            </searchField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B7b-6I-GdA">
+                                <rect key="frame" x="438" y="388" width="22" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="if_Plus_2001887" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="fty-Zp-vpx">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <segue destination="WNg-PU-qAV" kind="modal" identifier="NewProjectSegue" id="SUx-gq-97Z"/>
+                                </connections>
+                            </button>
                             <scrollView fixedFrame="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="42" horizontalPageScroll="10" verticalLineScroll="42" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aHL-1K-gz4">
                                 <rect key="frame" x="20" y="16" width="440" height="359"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -854,7 +888,7 @@
                                     </subviews>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="lY9-Hv-sgs">
-                                    <rect key="frame" x="0.0" y="344" width="440" height="15"/>
+                                    <rect key="frame" x="0.0" y="-15" width="0.0" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="aKk-ez-Tng">
@@ -862,32 +896,12 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <searchField wantsLayer="YES" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ss8-Iz-jQQ">
-                                <rect key="frame" x="20" y="388" width="395" height="22"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="JKW-Cz-2eN">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </searchFieldCell>
-                                <connections>
-                                    <action selector="searchFieldAction:" target="XfG-lQ-9wD" id="vRS-ec-dWb"/>
-                                </connections>
-                            </searchField>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B7b-6I-GdA">
-                                <rect key="frame" x="438" y="388" width="22" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="if_Plus_2001887" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="fty-Zp-vpx">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <segue destination="WNg-PU-qAV" kind="modal" identifier="NewProjectSegue" id="SUx-gq-97Z"/>
-                                </connections>
-                            </button>
                         </subviews>
                     </view>
                     <connections>
+                        <outlet property="firstProjectButton" destination="xRU-kq-19l" id="y31-ap-dtZ"/>
+                        <outlet property="newProjectButton" destination="B7b-6I-GdA" id="vFl-2w-O14"/>
+                        <outlet property="searchField" destination="Ss8-Iz-jQQ" id="LWD-qq-17p"/>
                         <outlet property="tableView" destination="uNH-fZ-MRH" id="d46-A5-flF"/>
                     </connections>
                 </viewController>
@@ -1166,4 +1180,7 @@
         <image name="if_terminal_298878" width="19" height="15"/>
         <image name="transmit" width="22" height="22"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="SUx-gq-97Z"/>
+    </inferredMetricsTieBreakers>
 </document>

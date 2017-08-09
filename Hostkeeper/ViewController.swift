@@ -10,6 +10,9 @@ import Cocoa
 
 class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NewProjectControllerDelegate, EditProjectControllerDelegate {
     
+    @IBOutlet weak var searchField: NSSearchField!
+    @IBOutlet weak var newProjectButton: NSButton!
+    @IBOutlet weak var firstProjectButton: NSButton!
     @IBOutlet weak var tableView: NSTableView!
     
     let managedObjectContext: NSManagedObjectContext = DataManager.instance.managedObjectContext
@@ -27,6 +30,13 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         projectsArray = fetchedProjects()
         
         tableView.reloadData()
+        
+        if projectsArray.count == 0 {
+            searchField.isHidden = true
+            newProjectButton.isHidden = true
+            tableView.isHidden = true
+            firstProjectButton.isHidden = false
+        }
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
@@ -201,6 +211,13 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     // MARK: NewProjectControllerDelegate
     
     func addNewProject(newProject: Project) {
+        if tableView.window == nil {
+            searchField.isHidden = false
+            newProjectButton.isHidden = false
+            tableView.isHidden = false
+            firstProjectButton.isHidden = true
+        }
+        
         projectsArray.insert(newProject, at: 0)
         
         tableView.beginUpdates()
