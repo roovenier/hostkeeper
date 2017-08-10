@@ -19,6 +19,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     
     var projectsArray = [Project]()
     var projectsArrayFiltered = [Project]()
+    var isStateForEmptyTable: Bool?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,12 +32,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         
         tableView.reloadData()
         
-        if projectsArray.count == 0 {
-            searchField.isHidden = true
-            newProjectButton.isHidden = true
-            tableView.isHidden = true
-            firstProjectButton.isHidden = false
-        }
+        setStatesForViews(isDataExists: projectsArray.count == 0 ? false : true)
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
@@ -94,6 +90,13 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     
     // MARK: Actions
     
+    func setStatesForViews(isDataExists: Bool) {
+        searchField.isHidden = !isDataExists
+        newProjectButton.isHidden = !isDataExists
+        tableView.isHidden = !isDataExists
+        firstProjectButton.isHidden = isDataExists
+        isStateForEmptyTable = !isDataExists
+    }
     
     @IBAction func searchFieldAction(_ sender: NSSearchField) {
         let searchValue = sender.stringValue.trimmingCharacters(in: .whitespaces)
@@ -179,6 +182,10 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
                     self.tableView.beginUpdates()
                     self.tableView.removeRows(at: IndexSet.init(integer: sender.tag), withAnimation: NSTableViewAnimationOptions.effectFade)
                     self.tableView.endUpdates()
+                    
+                    if self.projectsArray.count == 0 {
+                        self.setStatesForViews(isDataExists: false)
+                    }
                 } catch {
                     print("Error on insert new project")
                 }
@@ -206,16 +213,18 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
             let vc = segue.destinationController as! NewProjectController
             vc.delegate = self
         }
+        
+        if segue.identifier == "FirstProjectSegue" {
+            let vc = segue.destinationController as! NewProjectController
+            vc.delegate = self
+        }
     }
     
     // MARK: NewProjectControllerDelegate
     
     func addNewProject(newProject: Project) {
-        if tableView.window == nil {
-            searchField.isHidden = false
-            newProjectButton.isHidden = false
-            tableView.isHidden = false
-            firstProjectButton.isHidden = true
+        if isStateForEmptyTable! {
+            setStatesForViews(isDataExists: true)
         }
         
         projectsArray.insert(newProject, at: 0)
