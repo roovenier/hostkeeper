@@ -30,6 +30,12 @@ class NewProjectController: NSViewController {
         super.viewDidLoad()
     }
     
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        
+        self.view.window?.styleMask.remove(.resizable)
+    }
+    
     @IBAction func saveProjectAction(_ sender: NSButton) {
         let projectTitle = self.projectTitleField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
         let projectLink = self.projectLinkField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
