@@ -33,7 +33,7 @@ class NewProjectController: NSViewController {
     override func viewWillAppear() {
         super.viewWillAppear()
         
-        self.view.window?.styleMask.remove(.resizable)
+        _ = self.view.window?.styleMask.remove(.resizable)
     }
     
     @IBAction func saveProjectAction(_ sender: NSButton) {
@@ -62,8 +62,8 @@ class NewProjectController: NSViewController {
             }
         } else {
             NSAnimationContext.runAnimationGroup({ (context) in
-                context.duration = 4.5
-                noticeLabel.textColor = NSColor.red
+                context.duration = 0.5
+                self.noticeLabel.textColor = NSColor.red
             }, completionHandler: nil)
         }
     }

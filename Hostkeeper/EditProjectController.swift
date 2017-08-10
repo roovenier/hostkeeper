@@ -19,6 +19,7 @@ class EditProjectController: NSViewController {
     @IBOutlet weak var projectHostField: NSTextField!
     @IBOutlet weak var usernameField: NSTextField!
     @IBOutlet weak var passwordField: NSSecureTextField!
+    @IBOutlet weak var noticeLabel: NSTextField!
     
     let managedObjectContext: NSManagedObjectContext = DataManager.instance.managedObjectContext
     var delegate: EditProjectControllerDelegate?
@@ -26,6 +27,12 @@ class EditProjectController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        
+        _ = self.view.window?.styleMask.remove(.resizable)
     }
     
     override func viewDidAppear() {
@@ -61,6 +68,11 @@ class EditProjectController: NSViewController {
             } catch {
                 print("Error on insert new project")
             }
+        } else {
+            NSAnimationContext.runAnimationGroup({ (context) in
+                context.duration = 0.5
+                self.noticeLabel.textColor = NSColor.red
+            }, completionHandler: nil)
         }
     }
     
