@@ -173,7 +173,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     }
     
     func removeProject(sender: NSButton) {
-        let project = projectsArray[sender.tag]
+        let project = isSearchingActive ? projectsArrayFiltered[sender.tag] : projectsArray[sender.tag]
         
         let alert = NSAlert()
         alert.messageText = project.projectTitle!
@@ -189,11 +189,23 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
                 do {
                     try self.managedObjectContext.save()
                     
-                    self.projectsArray.remove(at: sender.tag)
+                    if let projectIndex = self.projectsArrayFiltered.index(of: project) {
+                        self.projectsArrayFiltered.remove(at: projectIndex)
+                        
+                        if let indexForFullArray = self.projectsArray.index(of: project) {
+                            self.projectsArray.remove(at: indexForFullArray)
+                        }
+                    } else {
+                        self.projectsArray.remove(at: sender.tag)
+                    }
                     
                     self.tableView.beginUpdates()
                     self.tableView.removeRows(at: IndexSet.init(integer: sender.tag), withAnimation: NSTableViewAnimationOptions.effectFade)
                     self.tableView.endUpdates()
+                    
+                    if self.projectsArrayFiltered.count == 0 {
+                        self.clearSearch()
+                    }
                     
                     if self.projectsArray.count == 0 {
                         self.setStatesForViews(isDataExists: false)
