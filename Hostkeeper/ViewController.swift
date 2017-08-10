@@ -71,8 +71,6 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
             button.action = #selector(editProject(sender:))
             return button
         } else if tableColumn!.identifier == "remove" {
-            clearSearch()
-            
             let button = tableView.make(withIdentifier: "remove", owner: self) as! NSButton
             button.tag = row
             button.target = self
