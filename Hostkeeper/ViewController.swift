@@ -20,6 +20,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     var projectsArray = [Project]()
     var projectsArrayFiltered = [Project]()
     var isStateForEmptyTable: Bool?
+    var isSearchingActive: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +37,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        if self.projectsArrayFiltered.count > 0 {
+        if isSearchingActive {
             return self.projectsArrayFiltered.count
         }
         else {
@@ -70,6 +71,8 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
             button.action = #selector(editProject(sender:))
             return button
         } else if tableColumn!.identifier == "remove" {
+            clearSearch()
+            
             let button = tableView.make(withIdentifier: "remove", owner: self) as! NSButton
             button.tag = row
             button.target = self
@@ -90,6 +93,13 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     
     // MARK: Actions
     
+    func clearSearch() {
+        projectsArrayFiltered.removeAll()
+        searchField.stringValue = ""
+        isSearchingActive = false
+        tableView.reloadData()
+    }
+    
     func setStatesForViews(isDataExists: Bool) {
         searchField.isHidden = !isDataExists
         newProjectButton.isHidden = !isDataExists
@@ -101,8 +111,12 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     @IBAction func searchFieldAction(_ sender: NSSearchField) {
         let searchValue = sender.stringValue.trimmingCharacters(in: .whitespaces)
         
+        isSearchingActive = true
+        
         if searchValue.characters.count == 0 {
             projectsArrayFiltered.removeAll()
+            
+            isSearchingActive = false
         } else {
             projectsArrayFiltered = self.projectsArray.filter { $0.projectTitle!.lowercased().contains(sender.stringValue.lowercased()) }
         }
@@ -150,7 +164,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     }
     
     func editProject(sender: NSButton) {
-        let project = projectsArray[sender.tag]
+        let project = isSearchingActive ? projectsArrayFiltered[sender.tag] : projectsArray[sender.tag]
         
         let vc = self.storyboard?.instantiateController(withIdentifier: "EditProjectController") as! EditProjectController
         
@@ -212,11 +226,13 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         if segue.identifier == "NewProjectSegue" {
             let vc = segue.destinationController as! NewProjectController
             vc.delegate = self
+            clearSearch()
         }
         
         if segue.identifier == "FirstProjectSegue" {
             let vc = segue.destinationController as! NewProjectController
             vc.delegate = self
+            clearSearch()
         }
     }
     
