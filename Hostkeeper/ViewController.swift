@@ -137,7 +137,8 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         let project = projectsArray[sender.tag]
         let scriptPath = Bundle.main.resourcePath! + "/exp"
         
-        let fullCommand = "tell application \"Terminal\"\n activate\n tell application \"System Events\" to keystroke \"t\" using command down\n do script \"\(scriptPath) \(project.password!) \(project.projectHost!) \(project.username!)\" in window 1\n end tell"
+        //  tell application \"System Events\"\n key code 53\n end tell\n
+        let fullCommand = "tell application \"Terminal\"\n activate\n tell application \"System Events\" to keystroke \"t\" using {command down}\n delay 0.2\n do script \"\(scriptPath) \(project.password!) \(project.projectHost!) \(project.username!)\" in window 1\n end tell"
         
         let appleScript = NSAppleScript.init(source: fullCommand)
         appleScript?.executeAndReturnError(nil)
@@ -146,7 +147,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     func openTransmit(sender: NSButton) {
         let project = projectsArray[sender.tag]
         
-        let fullCommand = "tell application \"Transmit\"\n activate\n tell document 1\n tell application \"System Events\" to keystroke \"t\" using command down\n delay 0.2\n tell current tab\n connect to address \"\(project.projectHost!)\" as user \"\(project.username!)\" with password \"\(project.password!)\"\n end tell\n end tell\n end tell"
+        let fullCommand = "tell application \"Transmit\"\n activate\n tell document 1\n tell application \"System Events\" to keystroke \"t\" using {command down}\n delay 0.2\n tell current tab\n connect to address \"\(project.projectHost!)\" as user \"\(project.username!)\" with password \"\(project.password!)\"\n end tell\n end tell\n end tell"
         
         let appleScript = NSAppleScript.init(source: fullCommand)
         appleScript?.executeAndReturnError(nil)
