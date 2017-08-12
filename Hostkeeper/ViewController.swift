@@ -134,27 +134,26 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     }
     
     func openTerminal(sender: NSButton) {
-        let project = projectsArray[sender.tag]
+        let project = isSearchingActive ? projectsArrayFiltered[sender.tag] : projectsArray[sender.tag]
         let scriptPath = Bundle.main.resourcePath! + "/exp"
         
-        //  tell application \"System Events\"\n key code 53\n end tell\n
-        let fullCommand = "tell application \"Terminal\"\n activate\n tell application \"System Events\" to keystroke \"t\" using {command down}\n delay 0.2\n do script \"\(scriptPath) \(project.password!) \(project.projectHost!) \(project.username!)\" in window 1\n end tell"
+        let fullCommand = "tell application \"Terminal\"\n activate\n do script \"\(scriptPath) \(project.password!) \(project.projectHost!) \(project.username!)\"\n end tell"
         
         let appleScript = NSAppleScript.init(source: fullCommand)
         appleScript?.executeAndReturnError(nil)
     }
     
     func openTransmit(sender: NSButton) {
-        let project = projectsArray[sender.tag]
+        let project = isSearchingActive ? projectsArrayFiltered[sender.tag] : projectsArray[sender.tag]
         
-        let fullCommand = "tell application \"Transmit\"\n activate\n tell document 1\n tell application \"System Events\" to keystroke \"t\" using {command down}\n delay 0.2\n tell current tab\n connect to address \"\(project.projectHost!)\" as user \"\(project.username!)\" with password \"\(project.password!)\"\n end tell\n end tell\n end tell"
+        let fullCommand = "tell application \"Transmit\"\n activate\n tell current tab of (make new document at end)\n connect to address \"\(project.projectHost!)\" as user \"\(project.username!)\" using port 22 with password \"\(project.password!)\" with protocol SFTP\n end tell\n end tell"
         
         let appleScript = NSAppleScript.init(source: fullCommand)
         appleScript?.executeAndReturnError(nil)
     }
     
     func openBrowser(sender: NSButton) {
-        let project = projectsArray[sender.tag]
+        let project = isSearchingActive ? projectsArrayFiltered[sender.tag] : projectsArray[sender.tag]
         
         let fullCommand = "tell application \"Google Chrome\"\n activate\n repeat with w in windows\n set i to 1\n repeat with t in tabs of w\n if URL of t starts with \"https://mail.google\" then\n set active tab index of w to i\n set index of w to 1\n return\n end if\n set i to i + 1\n end repeat\n end repeat\n open location \"\(project.projectLink!)\"\n end tell"
         
