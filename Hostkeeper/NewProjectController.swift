@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import AES256CBC
 
 protocol NewProjectControllerDelegate {
     func addNewProject(newProject: Project);
