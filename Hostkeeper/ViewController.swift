@@ -258,6 +258,8 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         tableView.beginUpdates()
         tableView.insertRows(at: IndexSet.init(integer: 0), withAnimation: NSTableViewAnimationOptions.effectFade)
         tableView.endUpdates()
+        
+        tableView.reloadData()
     }
     
     // MARK: EditProjectControllerDelegate
