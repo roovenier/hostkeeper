@@ -17,6 +17,7 @@ class EditProjectController: NSViewController {
     @IBOutlet weak var projectTitleField: NSTextField!
     @IBOutlet weak var projectLinkField: NSTextField!
     @IBOutlet weak var projectHostField: NSTextField!
+    @IBOutlet weak var projectPortField: NSTextField!
     @IBOutlet weak var usernameField: NSTextField!
     @IBOutlet weak var passwordField: NSSecureTextField!
     @IBOutlet weak var noticeLabel: NSTextField!
@@ -49,21 +50,25 @@ class EditProjectController: NSViewController {
         projectTitleField.stringValue = project!.projectTitle!
         projectLinkField.stringValue = project!.projectLink!
         projectHostField.stringValue = project!.projectHost!
+        projectPortField.stringValue = project!.projectPort!
         usernameField.stringValue = project!.username!
         passwordField.stringValue = project!.password!
     }
     
     @IBAction func saveProjectAction(_ sender: NSButton) {
         let projectTitle = self.projectTitleField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
-        let projectLink = self.projectLinkField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
         let projectHost = self.projectHostField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
         let username = self.usernameField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
         let password = self.passwordField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
         
-        if projectTitle.characters.count > 0 && projectLink.characters.count > 0 && projectHost.characters.count > 0 && username.characters.count > 0 && password.characters.count > 0 {
+        if projectTitle.characters.count > 0 && projectHost.characters.count > 0 && username.characters.count > 0 && password.characters.count > 0 {
+            let projectLink = self.projectLinkField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
+            let projectPort = self.projectPortField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
+            
             project?.projectTitle = projectTitle
             project?.projectLink = projectLink
             project?.projectHost = projectHost
+            project?.projectPort = projectPort.characters.count == 0 ? "22" : projectPort
             project?.username = username
             project?.password = password
             

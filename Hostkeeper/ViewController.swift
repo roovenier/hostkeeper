@@ -137,7 +137,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
         let project = isSearchingActive ? projectsArrayFiltered[sender.tag] : projectsArray[sender.tag]
         let scriptPath = Bundle.main.resourcePath! + "/exp"
         
-        let fullCommand = "tell application \"Terminal\"\n activate\n do script \"\(scriptPath) \(project.password!) \(project.projectHost!) \(project.username!)\"\n end tell"
+        let fullCommand = "tell application \"Terminal\"\n activate\n do script \"\(scriptPath) \(project.password!) \(project.projectHost!) \(project.username!) \(project.projectPort!)\"\n end tell"
         
         let appleScript = NSAppleScript.init(source: fullCommand)
         appleScript?.executeAndReturnError(nil)
@@ -146,7 +146,7 @@ class ViewController: NSViewController, NSTableViewDataSource, NSTableViewDelega
     func openTransmit(sender: NSButton) {
         let project = isSearchingActive ? projectsArrayFiltered[sender.tag] : projectsArray[sender.tag]
         
-        let fullCommand = "tell application \"Transmit\"\n activate\n tell current tab of (make new document at end)\n connect to address \"\(project.projectHost!)\" as user \"\(project.username!)\" using port 22 with password \"\(project.password!)\" with protocol SFTP\n end tell\n end tell"
+        let fullCommand = "tell application \"Transmit\"\n activate\n tell current tab of (make new document at end)\n connect to address \"\(project.projectHost!)\" as user \"\(project.username!)\" using port \(project.projectPort!) with password \"\(project.password!)\" with protocol SFTP\n end tell\n end tell"
         
         let appleScript = NSAppleScript.init(source: fullCommand)
         appleScript?.executeAndReturnError(nil)
